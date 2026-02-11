@@ -41,7 +41,7 @@ class Budget(Base):
     __tablename__ = "budgets"
     id = Column(Integer, primary_key=True)
     month = Column(String)
-    limit = Column(Integer)
+    limit = Column(float)
 
 # Create tables in database
 Base.metadata.create_all(engine)
@@ -57,7 +57,7 @@ def add_category():
 #add expense
 def add_expense():
     title = input("Expense title: ")
-    amount = int(input("Amount: "))
+    amount = float(input("Amount: "))
     date = input("Date (YYYY-MM-DD): ")
     category_id = int(input("Category ID: "))
     session.add(Expense(title=title, amount=amount, date=date, category_id=category_id))
@@ -70,7 +70,7 @@ def update_expense():
     expense = session.query(Expense).filter(Expense.id == expense_id).first()
     if expense:
         expense.title = input("New title: ")
-        expense.amount = int(input("New amount: "))
+        expense.amount = float(input("New amount: "))
         session.commit()
         print("Expense updated")
     else:
@@ -92,7 +92,7 @@ def search_by_date():
     date = input("Enter date: ")
     expenses = session.query(Expense).filter(Expense.date == date).all()
     for e in expenses:
-        print(e.title, "-", e.amount)
+        print(e.title, e.amount)
 
 #raw sql report
 def category_report():
@@ -105,11 +105,11 @@ def category_report():
     result = session.execute(text(sql))
     print("\nCategory Wise Expense Report")
     for row in result:
-        print(row[0], "→", row[1])
+        print(row[0], row[1])
         
 def set_budget():
     month = input("Month (YYYY-MM): ")
-    limit = int(input("Budget limit: "))
+    limit = float(input("Budget limit: "))
     session.add(Budget(month=month, limit=limit))
     session.commit()
     print("Monthly budget set")
