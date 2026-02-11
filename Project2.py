@@ -129,7 +129,6 @@ def budget_alert():
 #cli menu
 while True:
     print("""
-===== FINTRACK PRO =====
 1. Add Category
 2. Add Expense
 3. Update Expense
@@ -142,7 +141,6 @@ while True:
 """)
     
     choice = input("Choose: ")
-
     if choice == "1":
         add_category()
     elif choice == "2":
