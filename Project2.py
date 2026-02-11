@@ -23,7 +23,7 @@ class Expense(Base):
     __tablename__ = "expenses"
     id = Column(Integer, primary_key=True)
     title = Column(String)
-    amount = Column(float)
+    amount = Column(Float)
     date = Column(String)
     category_id = Column(Integer, ForeignKey("categories.id"))
     category = relationship("Category", back_populates="expenses")
@@ -33,7 +33,7 @@ class Subscription(Base):
     __tablename__ = "subscriptions"
     id = Column(Integer, primary_key=True)
     name = Column(String)
-    amount = Column(float)
+    amount = Column(Float)
     next_date = Column(String)
 
 #budget table:
@@ -41,7 +41,7 @@ class Budget(Base):
     __tablename__ = "budgets"
     id = Column(Integer, primary_key=True)
     month = Column(String)
-    limit = Column(float)
+    limit = Column(Float)
 
 # Create tables in database
 Base.metadata.create_all(engine)
